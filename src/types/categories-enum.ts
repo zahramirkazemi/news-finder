@@ -1,4 +1,4 @@
-enum NewsCategoriesEnum {
+enum CategoriesEnum {
   Business = "business",
   Entertainment = "entertainment",
   General = "general",
@@ -8,4 +8,4 @@ enum NewsCategoriesEnum {
   Technology = "technology",
 }
 
-export default NewsCategoriesEnum;
+export default CategoriesEnum;

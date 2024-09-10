@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { MAX_ARTICLE_PAGE } from "@/constant";
-import { Article, NewsCategories, NewsCategoriesEnum, NewsListFilters, SearchInEnum } from "@/types";
+import { Article, Categories, CategoriesEnum, NewsListFilters, SearchInEnum } from "@/types";
 import { useGetNewsListQuery, useGetSourcesQuery } from "@/services/news-api";
 import debounce from "@/utils/debounce";
 import ArticleCard from "./article-card";
@@ -11,7 +11,7 @@ import styles from "./news-list.module.scss";
 
 const NewsList: React.FC = () => {
   const [page, setPage] = useState(1);
-  const [category, setCategory] = useState<NewsCategories>('');
+  const [category, setCategory] = useState<Categories>('');
   const { data: sources } = useGetSourcesQuery({
     category
   });
@@ -119,13 +119,13 @@ const NewsList: React.FC = () => {
         </select>
         <select {...register('category')} className={styles.input}>
           <option value="">Category</option>
-          <option value={NewsCategoriesEnum.Business}>Business</option>
-          <option value={NewsCategoriesEnum.Entertainment}>Entertainment</option>
-          <option value={NewsCategoriesEnum.General}>General</option>
-          <option value={NewsCategoriesEnum.Health}>Health</option>
-          <option value={NewsCategoriesEnum.Science}>Science</option>
-          <option value={NewsCategoriesEnum.Sports}>Sports</option>
-          <option value={NewsCategoriesEnum.Technology}>Technology</option>
+          <option value={CategoriesEnum.Business}>Business</option>
+          <option value={CategoriesEnum.Entertainment}>Entertainment</option>
+          <option value={CategoriesEnum.General}>General</option>
+          <option value={CategoriesEnum.Health}>Health</option>
+          <option value={CategoriesEnum.Science}>Science</option>
+          <option value={CategoriesEnum.Sports}>Sports</option>
+          <option value={CategoriesEnum.Technology}>Technology</option>
         </select>
         <select {...register('sources')} className={styles.input}>
           {sources?.map(source => <option key={source.id} value={source.id}>{source.name}</option>)}

@@ -1,4 +1,4 @@
-$bluebell: #979fd0;
+@import './variables.scss';
 
 body {
   padding: 16px;
@@ -11,8 +11,8 @@ body {
   height: 1rem;
   margin: 3rem auto;
   border-radius: 50%;
-  border: 3px solid rgba($bluebell, 0.3);
-  border-top-color: $bluebell;
+  border: 3px solid rgba($text-muted, 0.3);
+  border-top-color: $text-muted;
   animation: 1.5s spin infinite linear;
 }
 

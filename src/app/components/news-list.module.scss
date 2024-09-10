@@ -8,9 +8,10 @@
   flex-direction: column;
 
   .newsListContainer {
-    border: 1px solid #edede9;
+    border: 1px solid $border-color;
     border-radius: $border-radius;
     overflow-y: scroll;
+    flex: 1;
   }
 
   .formContainer {
@@ -20,7 +21,7 @@
     flex-wrap: wrap;
 
     .input {
-      border: 1px solid #edede9;
+      border: 1px solid $border-color;
       border-radius: $border-radius;
       padding: 6px;
 

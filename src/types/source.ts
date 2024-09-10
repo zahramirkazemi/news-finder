@@ -1,7 +1,7 @@
-import NewsCategories from "./news-categories";
+import Categories from "./categories";
 
 interface Source {
-  category: NewsCategories;
+  category: Categories;
   country: string;
   description: string;
   id: string;
