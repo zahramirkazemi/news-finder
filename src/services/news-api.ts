@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Article, NewsApiResponse, NewsListFilters } from "../types";
+import { Article, NewsApiResponse, NewsCategories, NewsListFilters } from "../types";
 import { API_KEY, MAX_ARTICLE_PAGE } from "@/constant";
+import Source from "@/types/source";
 
 export const newsApi = createApi({
   reducerPath: "newsApi",
@@ -24,7 +25,11 @@ export const newsApi = createApi({
         ),
       }),
     }),
+    getSources: builder.query<Source[], {category?: NewsCategories}>({
+      query: ({ category }) => `top-headlines/sources?category=${category}&apiKey=${API_KEY}`,
+      transformResponse: (response: { status: string, sources: Source[] }) => (response.sources),
+    }),
   }),
 });
 
-export const { useGetTopHeadlinesQuery, useGetNewsListQuery } = newsApi;
+export const { useGetTopHeadlinesQuery, useGetNewsListQuery, useGetSourcesQuery } = newsApi;
