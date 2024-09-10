@@ -1,3 +1,4 @@
+import NewsCategories from "./news-categories";
 import SearchInType from "./search-in-type";
 
 interface NewsListFilters {
@@ -6,7 +7,7 @@ interface NewsListFilters {
   to?: string;
   page?: number;
   sources?: string;
-  category?: string;
+  category?: NewsCategories;
   searchIn?: SearchInType;
 }
 
