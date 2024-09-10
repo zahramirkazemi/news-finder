@@ -5,4 +5,9 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+
+  .divider {
+    border-top: 1px solid #edede9;
+    width: 70%;
+  }
 }

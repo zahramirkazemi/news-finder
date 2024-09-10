@@ -2,10 +2,11 @@
   width: 90%;
   flex: 1;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   .newsListContainer {
     border: 1px solid #edede9;
-    height: 90%;
     border-radius: 20px;
     overflow-y: scroll;
   }
