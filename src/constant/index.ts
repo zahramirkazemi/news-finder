@@ -1,2 +1,2 @@
-export const API_KEY = '94b6567d9a634ba192056205d9262123';
+export const API_KEY = 'a369778753444439853a99302b00788e';
 export const MAX_ARTICLE_PAGE = 20;

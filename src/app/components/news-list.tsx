@@ -3,34 +3,42 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { MAX_ARTICLE_PAGE } from "@/constant";
-import { Article, NewsCategoriesEnum, NewsListFilters } from "@/types";
-import { useGetNewsListQuery } from "@/services/news-api";
+import { Article, NewsCategories, NewsCategoriesEnum, NewsListFilters, SearchInEnum } from "@/types";
+import { useGetNewsListQuery, useGetSourcesQuery } from "@/services/news-api";
 import debounce from "@/utils/debounce";
 import ArticleCard from "./article-card";
 import styles from "./news-list.module.scss";
 
 const NewsList: React.FC = () => {
   const [page, setPage] = useState(1);
+  const [category, setCategory] = useState<NewsCategories>('');
+  const { data: sources } = useGetSourcesQuery({
+    category
+  });
   const [searchParams, setSearchParams] = useState<NewsListFilters>({
     query: "",
     sources: "abc-news",
     from: "",
     to: "",
-    category: "",
   });
   const [articles, setArticles] = useState<Article[]>([]);
-  const { register, handleSubmit, control } = useForm<NewsListFilters>();
-  const { data, isError, isLoading, isFetching } = useGetNewsListQuery({
+  const { register, setValue, handleSubmit, control } = useForm<NewsListFilters>();
+  const { data: newsList, isError, isLoading, isFetching } = useGetNewsListQuery({
     ...searchParams,
     page,
   });
+
   const loadingElement = <div className="loading"></div>;
-  const noNewsElement = <div className="error">There is no news! change your filters.</div>
   const errorElement = <p className="error">Error loading news list.</p>;
+
   const observer = useRef<IntersectionObserver | null>(null);
   const searchTerm = useWatch({
     control,
     name: 'query',
+  });
+  const selectedCategory = useWatch({
+    control,
+    name: 'category',
   });
 
   const handleLiveSearch = useCallback(
@@ -47,25 +55,31 @@ const NewsList: React.FC = () => {
     }
   }, [searchTerm, handleLiveSearch]);
 
-  const onSubmit = (data: NewsListFilters) => {
+  useEffect(() => {
+    const newSources = sources;
+    if(selectedCategory) {
+      setCategory(selectedCategory);
+      setValue("sources", newSources?.filter(source => source.category === selectedCategory)?.map(source => source.id).join())
+    }
+  },[sources, selectedCategory, setValue])
+
+  const onSubmit = (newsFilters: NewsListFilters) => {
     setSearchParams({
-      query: data.query || "",
-      sources: data.sources || "",
-      from: data.from || "",
-      to: data.to || "",
-      category: data.category || "",
-      searchIn: data.searchIn
+      query: newsFilters.query || "",
+      sources: newsFilters.sources || "",
+      from: newsFilters.from || "",
+      to: newsFilters.to || "",
+      searchIn: newsFilters.searchIn
     });
     setArticles([]);
     setPage(1);
   };
 
   useEffect(() => {
-    debugger;
-    if (data?.articles) {
-      setArticles((prevArticles) => [...prevArticles, ...data.articles]);
+    if (newsList?.articles) {
+      setArticles((prevArticles) => [...prevArticles, ...newsList.articles]);
     }
-  }, [data]);
+  }, [newsList]);
 
   const lastArticleElementRef = useCallback(
     (node: HTMLElement | null) => {
@@ -75,8 +89,8 @@ const NewsList: React.FC = () => {
       observer.current = new IntersectionObserver((entries) => {
         if (
           entries[0].isIntersecting &&
-          data?.totalResults &&
-          page * MAX_ARTICLE_PAGE < data?.totalResults
+          newsList?.totalResults &&
+          page * MAX_ARTICLE_PAGE < newsList?.totalResults
         ) {
           setPage((prevPage) => prevPage + 1);
         }
@@ -84,7 +98,7 @@ const NewsList: React.FC = () => {
 
       if (node) observer.current.observe(node);
     },
-    [isFetching, page, data]
+    [isFetching, page, newsList]
   );
 
   const renderSearchBar = (): JSX.Element => (
@@ -99,9 +113,9 @@ const NewsList: React.FC = () => {
         <input className={styles.input} type="date" placeholder="To..." {...register('to')} />
         <select {...register('searchIn')} className={styles.input}>
           <option value="">Search In</option>
-          <option value="title">Title</option>
-          <option value="description">Description</option>
-          <option value="content">Content</option>
+          <option value={SearchInEnum.Title}>Title</option>
+          <option value={SearchInEnum.Description}>Description</option>
+          <option value={SearchInEnum.Content}>Content</option>
         </select>
         <select {...register('category')} className={styles.input}>
           <option value="">Category</option>
@@ -112,6 +126,9 @@ const NewsList: React.FC = () => {
           <option value={NewsCategoriesEnum.Science}>Science</option>
           <option value={NewsCategoriesEnum.Sports}>Sports</option>
           <option value={NewsCategoriesEnum.Technology}>Technology</option>
+        </select>
+        <select {...register('sources')} className={styles.input}>
+          {sources?.map(source => <option key={source.id} value={source.id}>{source.name}</option>)}
         </select>
         <button type="submit">Search</button> 
     </form>
@@ -124,14 +141,14 @@ const NewsList: React.FC = () => {
       errorElement
     ) : (
       <section className={styles.newsListContainer}>
-        {articles.length > 0 && !isFetching ? articles.map((article, index) => (
+        {articles.map((article, index) => (
           <div
             key={index}
             ref={articles.length === index + 1 ? lastArticleElementRef : null}
           >
             <ArticleCard article={article} />
           </div>
-        )): noNewsElement}
+        ))}
         {isFetching && loadingElement}
       </section>
     );
