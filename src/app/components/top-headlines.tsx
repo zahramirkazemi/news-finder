@@ -5,6 +5,7 @@ import styles from "./top-headlines.module.scss";
 
 const TopHeadlines: React.FC = () => {
   const { data: articles, isError, isLoading } = useGetTopHeadlinesQuery();
+
   const loadingElement = <div className="loading"></div>;
   const errorElement = <p className='error'>Error loading headlines.</p>;
 
