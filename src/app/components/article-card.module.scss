@@ -1,8 +1,10 @@
+@import '../variables.scss';
+
 .container {
-  background-color: #f7f7f5;
+  background-color: $background-color;
   margin: 1rem;
   padding: 1rem;
-  border-radius: 12px;
+  border-radius: $border-radius;
 
   .title {
     margin: 10px 0;
@@ -13,6 +15,6 @@
 
   .info {
     font-size: 0.8rem;
-    color: #8d8d8d;
+    color: $text-muted;
   }
 }

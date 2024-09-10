@@ -1,3 +1,5 @@
+@import '../variables.scss';
+
 .container {
   width: 90%;
   flex: 1;
@@ -7,7 +9,7 @@
 
   .newsListContainer {
     border: 1px solid #edede9;
-    border-radius: 20px;
+    border-radius: $border-radius;
     overflow-y: scroll;
   }
 
@@ -19,7 +21,7 @@
 
     .input {
       border: 1px solid #edede9;
-      border-radius: 6px;
+      border-radius: $border-radius;
       padding: 6px;
 
       &:focus-visible {
