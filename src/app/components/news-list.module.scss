@@ -1,0 +1,30 @@
+.container {
+  width: 90%;
+  flex: 1;
+  overflow: hidden;
+
+  .newsListContainer {
+    border: 1px solid #edede9;
+    height: 90%;
+    border-radius: 20px;
+    overflow-y: scroll;
+  }
+
+  .formContainer {
+    margin: 12px 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    .input {
+      border: 1px solid #edede9;
+      border-radius: 6px;
+      padding: 6px;
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,18 @@
+.container {
+  background-color: #f7f7f5;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+
+  .title {
+    margin: 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .info {
+    font-size: 0.8rem;
+    color: #8d8d8d;
+  }
+}
