@@ -2,8 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useWatch, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { MAX_ARTICLE_PAGE } from "@/constant";
 import { Article, NewsListFilters, Categories } from "@/types";
+import { newsListFiltersSchema } from "@/utils/filter-validation-schema";
 import { useGetNewsListQuery, useGetSourcesQuery } from "@/services/news-api";
 import debounce from "@/utils/debounce";
 import SearchForm from "./search-form";
@@ -21,8 +23,10 @@ const NewsList: React.FC = () => {
     to: "",
   });
   const [articles, setArticles] = useState<Article[]>([]);
-  const { register, setValue, handleSubmit, control } =
-    useForm<NewsListFilters>();
+  const { register, setValue, handleSubmit, control, formState: { errors } } = useForm<NewsListFilters>({
+    resolver: zodResolver(newsListFiltersSchema),
+    defaultValues: { sources: 'abc-news'},
+  });
 
   const {
     data: newsList,
@@ -102,6 +106,7 @@ const NewsList: React.FC = () => {
         handleSubmit={handleSubmit}
         onSubmit={handleFormSubmit}
         register={register}
+        errors={errors}
       />
       <NewsListDisplay
         articles={articles}
