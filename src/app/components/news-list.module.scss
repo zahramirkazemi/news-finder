@@ -19,15 +19,31 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    align-items: flex-start;
 
-    .input {
-      border: 1px solid $border-color;
-      border-radius: $border-radius;
+    .input {    
+      box-sizing: border-box;
+      border: 1px solid #edede9;
+      border-radius: 8px;
       padding: 6px;
+      height: 40px;
 
       &:focus-visible {
         outline: none;
       }
+    }
+
+    .searchButton {
+      height: 40px;
+      width: 80px;
+      border: 1px solid #edede9;
+      border-radius: 8px;
+    }
+
+    .inlineError {
+      color: red;
+      font-size: 12px;
+      margin: 0;
     }
   }
 }
