@@ -13,6 +13,12 @@
     text-overflow: ellipsis;
   }
 
+  .description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .info {
     font-size: 0.8rem;
     color: $text-muted;
