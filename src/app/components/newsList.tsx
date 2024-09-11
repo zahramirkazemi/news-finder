@@ -2,15 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useWatch, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { MAX_ARTICLE_PAGE } from "@/constant";
 import { Article, NewsListFilters, Categories } from "@/types";
-import { newsListFiltersSchema } from "@/utils/filter-validation-schema";
-import { useGetNewsListQuery, useGetSourcesQuery } from "@/services/news-api";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { newsListFiltersSchema } from "@/utils/filterValidationSchema";
+import { useGetNewsListQuery, useGetSourcesQuery } from "@/services/newsApi";
 import debounce from "@/utils/debounce";
-import SearchForm from "./search-form";
-import NewsListDisplay from "./news-list-display";
-import styles from "./news-list.module.scss";
+import SearchForm from "./searchForm";
+import NewsListDisplay from "./newsListDisplay";
+import styles from "./newsList.module.scss";
 
 const NewsList: React.FC = () => {
   const [page, setPage] = useState(1);

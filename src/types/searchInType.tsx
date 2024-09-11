@@ -1,4 +1,4 @@
-import SearchInEnum from "./search-in-enum";
+import SearchInEnum from "./searchInEnum";
 
 type SearchInType = SearchInEnum.Title | SearchInEnum.Description | SearchInEnum.Content;
 

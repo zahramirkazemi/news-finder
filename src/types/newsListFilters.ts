@@ -1,5 +1,5 @@
 import Categories from "./categories";
-import SearchInType from "./search-in-type";
+import SearchInType from "./searchInType";
 
 interface NewsListFilters {
   query?: string;

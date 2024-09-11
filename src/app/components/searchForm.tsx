@@ -6,7 +6,7 @@ import {
   FieldErrors,
 } from "react-hook-form";
 import { CategoriesEnum, SearchInEnum, NewsListFilters } from "@/types";
-import styles from "./news-list.module.scss";
+import styles from "./newsList.module.scss";
 
 interface SearchFormProps {
   sources: { id: string; name: string }[];

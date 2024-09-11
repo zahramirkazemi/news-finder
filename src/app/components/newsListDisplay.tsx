@@ -1,8 +1,8 @@
 "use client";
 
 import { Article } from "@/types";
-import ArticleCard from "./article-card";
-import styles from "./news-list.module.scss";
+import ArticleCard from "./articleCard";
+import styles from "./newsList.module.scss";
 
 interface NewsListDisplayProps {
   articles: Article[];

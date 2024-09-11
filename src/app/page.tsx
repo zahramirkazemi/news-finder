@@ -1,5 +1,5 @@
-import NewsList from './components/news-list';
-import TopHeadlines from './components/top-headlines';
+import NewsList from './components/newsList';
+import TopHeadlines from './components/topHeadlines';
 import styles from './page.module.scss';
 
 export default function Home() {

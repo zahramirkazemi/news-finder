@@ -1,7 +1,7 @@
 "use client";
 
-import { useGetTopHeadlinesQuery } from "@/services/news-api";
-import styles from "./top-headlines.module.scss";
+import { useGetTopHeadlinesQuery } from "@/services/newsApi";
+import styles from "./topHeadlines.module.scss";
 
 const TopHeadlines: React.FC = () => {
   const { data: articles, isError, isLoading } = useGetTopHeadlinesQuery();
