@@ -26,10 +26,10 @@ const NewsListDisplay: React.FC<NewsListDisplayProps> = ({
   lastArticleElementRef,
 }) => {
   const rowVirtualizer = useVirtualizer({
-    count: articles.length,
+    count: isFetching ? articles.length + 1 : articles.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 190,
-    overscan: 3,
+    overscan: 0,
   });
 
   const parentRef = useRef<HTMLDivElement | null>(null);
@@ -64,11 +64,14 @@ const NewsListDisplay: React.FC<NewsListDisplayProps> = ({
                 width: "100%",
               }}
             >
-              <ArticleCard article={article} />
+              {isFetching && virtualRow.index > articles.length - 1 ? (
+                loadingElement
+              ) : (
+                <ArticleCard article={article} />
+              )}
             </div>
           );
         })}
-        {isFetching && loadingElement}
       </div>
     </section>
   );
