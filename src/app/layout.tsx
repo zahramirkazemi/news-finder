@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+// store
 import ReduxProvider from "@/store-provider";
-import "./globals.scss";
+// styles
+import "@/app/globals.scss";
 
 export const metadata: Metadata = {
   title: "News Feed",

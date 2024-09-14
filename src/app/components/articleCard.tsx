@@ -1,8 +1,10 @@
 "use client";
-
+// types
 import { Article } from "@/types";
+// utils
 import dateFormat from "@/utils/dateFormat";
-import styles from "./articleCard.module.scss";
+// styles
+import styles from "@/app/components/articleCard.module.scss";
 
 interface ArticleCardProps {
   article: Article,

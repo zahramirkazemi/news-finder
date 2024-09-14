@@ -1,4 +1,4 @@
-import CategoriesEnum from "./categoriesEnum";
+import CategoriesEnum from "@/types/categoriesEnum";
 
 type Categories = CategoriesEnum.Business | CategoriesEnum.Entertainment | CategoriesEnum.General | CategoriesEnum.Health | CategoriesEnum.Science | CategoriesEnum.Sports | CategoriesEnum.Technology | '';
 

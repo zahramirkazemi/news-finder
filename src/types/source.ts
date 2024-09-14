@@ -1,4 +1,4 @@
-import Categories from "./categories";
+import Categories from "@/types/categories";
 
 interface Source {
   category: Categories;

@@ -1,16 +1,23 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+// modules
 import { useWatch, useForm } from "react-hook-form";
-import { MAX_ARTICLE_PAGE } from "@/constant";
-import { Article, NewsListFilters, Categories } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+//constants
+import { MAX_ARTICLE_PAGE } from "@/constant";
+// types
+import { Article, NewsListFilters, Categories } from "@/types";
+// utils
 import { newsListFiltersSchema } from "@/utils/filterValidationSchema";
-import { useGetNewsListQuery, useGetSourcesQuery } from "@/services/newsApi";
 import debounce from "@/utils/debounce";
-import SearchForm from "./searchForm";
-import NewsListDisplay from "./newsListDisplay";
-import styles from "./newsList.module.scss";
+// api
+import { useGetNewsListQuery, useGetSourcesQuery } from "@/services/newsApi";
+// components
+import SearchForm from "@/app/components/searchForm";
+import NewsListDisplay from "@/app/components/newsListDisplay";
+// styles
+import styles from "@/app/components/newsList.module.scss";
 
 const NewsList: React.FC = () => {
   const [page, setPage] = useState(1);

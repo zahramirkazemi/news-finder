@@ -1,7 +1,9 @@
+// redux
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Article, NewsApiResponse, Categories, NewsListFilters } from "@/types";
+// types
+import { Article, NewsApiResponse, Categories, NewsListFilters, Source } from "@/types";
+//constants
 import { API_KEY, MAX_ARTICLE_PAGE } from "@/constant";
-import Source from "@/types/source";
 
 export const newsApi = createApi({
   reducerPath: "newsApi",

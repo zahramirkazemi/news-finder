@@ -1,4 +1,4 @@
-import Article from "./article";
+import Article from "@/types/article";
 
 interface NewsApiResponse {
   status: string;

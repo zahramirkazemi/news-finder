@@ -1,12 +1,14 @@
 "use client";
-
+// form
 import {
   UseFormHandleSubmit,
   UseFormRegister,
   FieldErrors,
 } from "react-hook-form";
+// types
 import { CategoriesEnum, SearchInEnum, NewsListFilters } from "@/types";
-import styles from "./newsList.module.scss";
+// styles
+import styles from "@/app/components/newsList.module.scss";
 
 interface SearchFormProps {
   sources: { id: string; name: string }[];

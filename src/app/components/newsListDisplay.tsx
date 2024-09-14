@@ -1,10 +1,14 @@
 "use client";
 
 import { useRef } from "react";
+// modules
 import { useVirtualizer } from "@tanstack/react-virtual";
+// types
 import { Article } from "@/types";
-import ArticleCard from "./articleCard";
-import styles from "./newsList.module.scss";
+// components
+import ArticleCard from "@/app/components/articleCard";
+//styles
+import styles from "@/app/components/newsList.module.scss";
 
 interface NewsListDisplayProps {
   articles: Article[];
