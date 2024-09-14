@@ -1,0 +1,13 @@
+.main {
+  width: 100%;
+  height: calc(100vh - 32px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .divider {
+    border-top: 1px solid #edede9;
+    width: 70%;
+  }
+}

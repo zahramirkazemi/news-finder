@@ -1,0 +1,26 @@
+@import '@/app/variables.scss';
+
+.container {
+  background-color: $background-color;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: $border-radius;
+
+  .title {
+    margin: 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .info {
+    font-size: 0.8rem;
+    color: $text-muted;
+  }
+}

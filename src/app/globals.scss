@@ -1,0 +1,28 @@
+@import '@/app/variables.scss';
+
+body {
+  padding: 16px;
+  margin: 0;
+  width: calc(100% - 32px);
+}
+
+.loading {  
+  width: 1rem;
+  height: 1rem;
+  margin: 3rem auto;
+  border-radius: 50%;
+  border: 3px solid rgba($text-muted, 0.3);
+  border-top-color: $text-muted;
+  animation: 1.5s spin infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  margin: 3rem auto;
+  width: fit-content;
+}
