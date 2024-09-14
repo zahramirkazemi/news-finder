@@ -1,5 +1,11 @@
-import CategoriesEnum from "@/types/categoriesEnum";
+export enum CategoriesEnum {
+  Business = "business",
+  Entertainment = "entertainment",
+  General = "general",
+  Health = "health",
+  Science = "science",
+  Sports = "sports",
+  Technology = "technology",
+}
 
-type Categories = CategoriesEnum.Business | CategoriesEnum.Entertainment | CategoriesEnum.General | CategoriesEnum.Health | CategoriesEnum.Science | CategoriesEnum.Sports | CategoriesEnum.Technology | '';
-
-export default Categories;
+export type Categories = CategoriesEnum.Business | CategoriesEnum.Entertainment | CategoriesEnum.General | CategoriesEnum.Health | CategoriesEnum.Science | CategoriesEnum.Sports | CategoriesEnum.Technology | '';

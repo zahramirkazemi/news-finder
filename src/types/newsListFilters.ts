@@ -1,5 +1,4 @@
-import Categories from "@/types/categories";
-import SearchInType from "@/types/searchInType";
+import { Categories, SearchInType } from "@/types";
 
 interface NewsListFilters {
   query?: string;

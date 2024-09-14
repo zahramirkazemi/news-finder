@@ -3,13 +3,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 // modules
 import { useWatch, useForm } from "react-hook-form";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 //constants
 import { MAX_ARTICLE_PAGE } from "@/constant";
 // types
 import { Article, NewsListFilters, Categories } from "@/types";
 // utils
-import { newsListFiltersSchema } from "@/utils/filterValidationSchema";
 import debounce from "@/utils/debounce";
 // api
 import { useGetNewsListQuery, useGetSourcesQuery } from "@/services/newsApi";
@@ -18,6 +18,21 @@ import SearchForm from "@/app/components/searchForm";
 import NewsListDisplay from "@/app/components/newsListDisplay";
 // styles
 import styles from "@/app/components/newsList.module.scss";
+
+const newsListFiltersSchema = z
+.object({
+  query: z.string().optional(),
+  from: z.string().optional(),
+  to: z.string().optional(),
+  searchIn: z.string().optional(),
+  category: z.string().optional(),
+  sources: z.string(),
+})
+.refine(
+  (data) =>
+    !data.from || !data.to || new Date(data.to) >= new Date(data.from),
+  { message: "end-date must be later than start-date", path: ["to"] }
+);
 
 const NewsList: React.FC = () => {
   const [page, setPage] = useState(1);
