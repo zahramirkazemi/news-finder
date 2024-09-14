@@ -20,19 +20,23 @@ import NewsListDisplay from "@/app/components/newsListDisplay";
 import styles from "@/app/components/newsList.module.scss";
 
 const newsListFiltersSchema = z
-.object({
-  query: z.string().optional(),
-  from: z.string().optional(),
-  to: z.string().optional(),
-  searchIn: z.string().optional(),
-  category: z.string().optional(),
-  sources: z.string(),
-})
-.refine(
-  (data) =>
-    !data.from || !data.to || new Date(data.to) >= new Date(data.from),
-  { message: "end-date must be later than start-date", path: ["to"] }
-);
+  .object({
+    query: z.string().optional(),
+    from: z
+      .union([z.string().length(0), z.string().date()])
+      .optional(),
+    to: z
+      .union([z.string().length(0), z.string().date()])
+      .optional(),
+    searchIn: z.string().optional(),
+    category: z.string().optional(),
+    sources: z.string(),
+  })
+  .refine(
+    (data) =>
+      !data.from || !data.to || new Date(data.to) >= new Date(data.from),
+    { message: "end-date must be later than start-date", path: ["to"] }
+  );
 
 const NewsList: React.FC = () => {
   const [page, setPage] = useState(1);
@@ -45,9 +49,15 @@ const NewsList: React.FC = () => {
     to: "",
   });
   const [articles, setArticles] = useState<Article[]>([]);
-  const { register, setValue, handleSubmit, control, formState: { errors } } = useForm<NewsListFilters>({
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<NewsListFilters>({
     resolver: zodResolver(newsListFiltersSchema),
-    defaultValues: { sources: 'abc-news'},
+    defaultValues: { sources: "abc-news" },
   });
 
   const {
@@ -119,7 +129,7 @@ const NewsList: React.FC = () => {
     setSearchParams(data);
     setArticles([]);
     setPage(1);
-  }
+  };
 
   return (
     <section className={styles.container}>
