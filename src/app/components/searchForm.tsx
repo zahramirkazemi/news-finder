@@ -6,7 +6,11 @@ import {
   FieldErrors,
 } from "react-hook-form";
 // types
-import { CategoriesEnum, SearchInEnum, NewsListFilters } from "@/types";
+import {
+  CategoriesEnum,
+  SearchInEnum,
+  NewsListFilters,
+} from "@/types";
 // styles
 import styles from "@/app/components/newsList.module.scss";
 
@@ -25,25 +29,40 @@ const SearchForm: React.FC<SearchFormProps> = ({
   register,
   errors,
 }) => {
+  const categoriesOptions = [
+    CategoriesEnum.Business,
+    CategoriesEnum.Entertainment,
+    CategoriesEnum.General,
+    CategoriesEnum.Health,
+    CategoriesEnum.Science,
+    CategoriesEnum.Sports,
+    CategoriesEnum.Technology,
+  ];
+  const searchInOptions = [
+    SearchInEnum.Title,
+    SearchInEnum.Description,
+    SearchInEnum.Content,
+  ];
+
   const renderSearchInOptions = (
     <>
       <option value="">Search In</option>
-      <option value={SearchInEnum.Title}>Title</option>
-      <option value={SearchInEnum.Description}>Description</option>
-      <option value={SearchInEnum.Content}>Content</option>
+      {searchInOptions.map((option) => (
+        <option key={option} value={option}>
+          {option}
+        </option>
+      ))}
     </>
   );
 
   const renderCategoriesOptions = (
     <>
       <option value="">Category</option>
-      <option value={CategoriesEnum.Business}>Business</option>
-      <option value={CategoriesEnum.Entertainment}>Entertainment</option>
-      <option value={CategoriesEnum.General}>General</option>
-      <option value={CategoriesEnum.Health}>Health</option>
-      <option value={CategoriesEnum.Science}>Science</option>
-      <option value={CategoriesEnum.Sports}>Sports</option>
-      <option value={CategoriesEnum.Technology}>Technology</option>
+      {categoriesOptions.map((option) => (
+        <option key={option} value={option}>
+          {option}
+        </option>
+      ))}
     </>
   );
 
@@ -62,7 +81,9 @@ const SearchForm: React.FC<SearchFormProps> = ({
           placeholder="From..."
           {...register("from")}
         />
-        {errors.from && <p className={styles.inlineError}>{errors.from.message}</p>}
+        {errors.from && (
+          <p className={styles.inlineError}>{errors.from.message}</p>
+        )}
       </span>
       <span>
         <input
@@ -79,14 +100,20 @@ const SearchForm: React.FC<SearchFormProps> = ({
       <select {...register("category")} className={styles.input}>
         {renderCategoriesOptions}
       </select>
-      <select {...register("sources")} className={styles.input} defaultValue='abc-news'>
+      <select
+        {...register("sources")}
+        className={styles.input}
+        defaultValue="abc-news"
+      >
         {sources?.map((source) => (
           <option key={source.id} value={source.id}>
             {source.name}
           </option>
         ))}
       </select>
-      <button className={styles.searchButton} type="submit">Search</button>
+      <button className={styles.searchButton} type="submit">
+        Search
+      </button>
     </form>
   );
 };
